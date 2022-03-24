@@ -1,6 +1,29 @@
 $emailSubject = "PCI Data Loss Prevention Test Email"
 $fakeCreditCard = "MasterCard 5555555555554444 "
 
+# install required modules if missing
+function Install-Prerequisites {
+    function Install-PrerequisiteModule {
+        param([Parameter(Mandatory = $true)] $moduleName)    
+        if (Get-Module -ListAvailable -Name $moduleName) {
+            Write-Host "$moduleName already installed"
+        } 
+        else {
+            try {
+                Write-Host "Installing missing module: $moduleName..."
+                Install-Module -Name $moduleName
+            }
+            catch [Exception] {
+                $_.message 
+                Exit
+            }
+        }
+    }
+
+    Install-PrerequisiteModule AzureAD
+    Install-PrerequisiteModule ExchangeOnlineManagement
+}
+
 # return the number of credit cards required to trigger the rule
 function Get-NumberOfCreditCards {
     param([Parameter(Mandatory = $true)] [string]$chosenAccessScope)
@@ -49,6 +72,7 @@ function Exit-ThisScript() {
     Exit
 }
 
+Install-Prerequisites
 Write-Output "Logging in to Azure AD. The login window may be behind other windows..."
 $azureConnection = Connect-AzureAD
 Connect-IPPSSession -UserPrincipalName $azureConnection.Account
