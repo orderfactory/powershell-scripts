@@ -5,16 +5,18 @@
 #   'Rulle to Check' = 'Example string to trigger the rule'
 $rulesToCheck = @{
     'Credit Card Number' = 'MasterCard 5555555555554444'
-    'U.S. Social Security Number (SSN)' = 'SSN 078-05-1120'
-    'U.S. Individual Taxpayer Identification Number (ITIN)' = 'tin 97-70-51120'
+    'U.S. Social Security Number (SSN)' = 'SSN 694-09-5553'
+    'U.S. Individual Taxpayer Identification Number (ITIN)' = 'itin 957-82-4338'
     'U.S. Bank Account Number' = 'Debit Account 021000021'
-    'ABA Routing Number' = 'aba 723841959'
+    'ABA Routing Number' = 'aba 121042882'
     'U.S. / U.K. Passport Number' = 'passport no P31195855 17 Sep 2031'
     'Drug Enforcement Agency (DEA) number' = 'dea KV2993548'
+    'International Classification of Diseases (ICD-9-CM)' = 'ICD-9-CM Diagnosis Code 425.11 Hypertrophic obstructive cardiomyopathy'
+    'International Classification of Diseases (ICD-10-CM)' = 'ICD-10-CM Diagnosis Code A15.7 Primary respiratory tuberculosis'
 }
 
 $global:externalEmailAddress = $null
-$emailSubject = "PCI Data Loss Prevention Test Email"
+$emailSubject = "Data Loss Prevention (DLP) Test Email"
 
 # Install required modules if missing
 function Install-Prerequisites {
